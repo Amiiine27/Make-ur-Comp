@@ -1,22 +1,24 @@
-package org.example.makeurcomp
+ package org.example.makeurcomp
 
-fun main() {
-    val joueurs = listOf(
-        Joueur("Amine", "Akhrib", 20, 7.0),
-        Joueur("Nassim", "Rahal", 20, 7.0),
-        Joueur("Nabil", "Aouraghe", 30, 9.0),
-        Joueur("Faycal", "Beddiaf", 20, 8.0),
+ import org.jetbrains.exposed.sql.Database
 
-        Joueur("Mehdi", "Bouainane", 20, 8.5),
-        Joueur("Axel", "Gerke", 54, 4.0),
-        Joueur("Jordan", "Dutallis", 29, 6.5),
-        Joueur("Rayan", "Acheraiou", 21, 7.0),
+ fun main() {
+    fun connectToDatabase() {
+        Database.connect(
+            url = "jdbc:mysql://localhost:3306/makeurcomp",
+            driver = "com.mysql.cj.jdbc.Driver",
+            user = "root",
+            password = ""
+        )
+    }
+     connectToDatabase()
 
-        Joueur("Yann-Yves", "Laplume", 37, 6.75),
-        Joueur("Ahmed", "Elmzouri", 40, 7.5),
-        Joueur("Thomas", "David", 24, 7.0),
-        Joueur("Mickael", "Ettedgui", 43, 6.75)
-    )
+     val joueurs = recupererJoueurs()
+     joueurs.forEach { joueur ->
+         println("${joueur.prenom} ${joueur.nom}: Age=${joueur.age}, Niveau=${joueur.niveau}")
+     }
+
+     println()
 
     val tableau = EquipeManager.repartirEquipes(joueurs)
 
