@@ -18,15 +18,14 @@ fun main() {
         Joueur("Mickael", "Ettedgui", 43, 6.75)
     )
 
-    val nbEquipes = 3
-    val tableau = repartirJoueurs(joueurs, nbEquipes)
+    val tableau = EquipeManager.repartirEquipes(joueurs)
 
     tableau.equipes.forEachIndexed { index, equipe ->
-        println("Equipe ${index +1} : ")
-        equipe.joueurs.forEach { joueur ->
-            println("${joueur.prenom} \t | ${joueur.nom} \t | ${joueur.niveau}")
-        }
-        println("Moyenne de nieveau : ${equipe.moyenneNiveau()}")
+        println("Équipe ${index + 1}: Niveau moyen = ${equipe.niveauMoyen}")
+        println("  ${equipe.joueur1.prenom} (${equipe.joueur1.niveau})")
+        println("  ${equipe.joueur2.prenom} (${equipe.joueur2.niveau})")
+        println("  ${equipe.joueur3.prenom} (${equipe.joueur3.niveau})")
+        println("  ${equipe.joueur4.prenom} (${equipe.joueur4.niveau})")
         println()
     }
 }
